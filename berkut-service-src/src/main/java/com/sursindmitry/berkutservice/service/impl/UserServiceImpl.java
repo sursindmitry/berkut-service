@@ -80,4 +80,36 @@ public class UserServiceImpl implements UserService {
 
         return userId;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public User findById(UUID userId) {
+        log.debug("Поиск пользователя по идентификатору {}", userId);
+
+        return userRepository.findById(userId)
+            .orElseThrow(() -> new NotFoundException("Пользователь не найден"));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public boolean existsById(UUID userId) {
+        return userRepository.existsById(userId);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @Transactional
+    public void save(User user) {
+        log.debug("Сохраняет пользователя");
+
+        userRepository.save(user);
+    }
 }

@@ -24,6 +24,7 @@ public interface UserMapper {
     @Mapping(target = "updated", ignore = true)
     @Mapping(target = "updatedBy", ignore = true)
     @Mapping(target = "emailVerified", constant = "true")
+    @Mapping(target = "chatId", ignore = true)
     User requestToUser(RegisterUserRequest request, UUID userId);
 
     @Mapping(target = "id", source = "user.id")
