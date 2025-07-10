@@ -1,0 +1,24 @@
+users:
+  - id: "1bd81f3f-61a1-49d8-ba04-84befea1e943"
+    first_name: "Dmitry"
+    last_name: "Sursin"
+    email: "sursindmitryi@gmail.com"
+    email_verified: true
+    created: "2025-06-02 07:00:00.000000"
+users_roles:
+  - id: "ec2adc0f-0b49-4aaa-925b-1293c5056459"
+    role_id: "763a09d3-3ceb-4efe-b637-d48518a5d0cf"
+    user_id: "1bd81f3f-61a1-49d8-ba04-84befea1e943"
+roles:
+  - id: "958efd14-fe13-444f-ae72-eb59282010b2"
+    name: "ROLE_ADMIN"
+    description: "Роль администратора"
+  - id: "831cc60d-460a-49c5-9ca1-d4c7e6bc310f"
+    name: "ROLE_MODERATOR"
+    description: "Роль модератора"
+  - id: "553b9edb-dfc8-473d-b9db-9ca37dc3fb26"
+    name: "ROLE_MANAGER"
+    description: "Роль менеджера"
+  - id: "763a09d3-3ceb-4efe-b637-d48518a5d0cf"
+    name: "ROLE_USER"
+    description: "Роль пользователя"

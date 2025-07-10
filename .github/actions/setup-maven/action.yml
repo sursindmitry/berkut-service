@@ -1,0 +1,43 @@
+name: 'Setup Maven settings.xml for GitHub Packages'
+description: 'Configures Maven to use GitHub Packages registry'
+inputs:
+  username:
+    required: true
+    description: Имя пользователя
+  token:
+    required: true
+    description: Токен доступа
+runs:
+  using: 'composite'
+  steps:
+    - shell: bash
+      env:
+        USERNAME_GITHUB: ${{ inputs.username }}
+        TOKEN_GITHUB: ${{ inputs.token }}
+      run: |
+        mkdir -p ~/.m2
+        cat > ~/.m2/settings.xml <<EOF
+        <settings>
+          <servers>
+            <server>
+              <id>github</id>
+              <username>${USERNAME_GITHUB}</username>
+              <password>${TOKEN_GITHUB}</password>
+            </server>
+          </servers>
+          <profiles>
+            <profile>
+              <id>github</id>
+              <repositories>
+                <repository>
+                  <id>github</id>
+                  <url>https://maven.pkg.github.com/sursindmitry/platform-common-models</url>
+                </repository>
+              </repositories>
+            </profile>
+          </profiles>
+          <activeProfiles>
+            <activeProfile>github</activeProfile>
+          </activeProfiles>
+        </settings>
+        EOF
