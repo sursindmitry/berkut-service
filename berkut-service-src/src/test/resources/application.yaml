@@ -1,0 +1,12 @@
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/realms/platform
+
+  liquibase:
+    enabled: true
+    change-log: db/changelog/db.changelog.yaml
+    default-schema: berkut_service
+    liquibase-schema: berkut_service
