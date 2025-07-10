@@ -28,7 +28,7 @@ jobs:
 
       - name: Build and Test
         working-directory: .
-        run: mvn clean install -Dspring.profiles.active=test
+        run: TELEGRAM_TOKEN=${{ secrets.TELEGRAM_TOKEN }} mvn clean install -Dspring.profiles.active=test
 
   push-ghcr:
     name: Build branch and push ghcr.io

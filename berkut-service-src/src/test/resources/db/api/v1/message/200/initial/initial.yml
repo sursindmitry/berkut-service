@@ -1,0 +1,25 @@
+users:
+  - id: "32a3fef2-f97a-47f2-9026-a4f1b793456e"
+    first_name: "userName"
+    last_name: "userLastname"
+    email: "user@user.ru"
+    email_verified: true
+    chat_id: 633640583
+    created: "2025-06-02 07:00:00.000000"
+users_roles:
+  - id: "1c0ed1ff-38ee-452d-8762-5a0fac414b50"
+    role_id: "763a09d3-3ceb-4efe-b637-d48518a5d0cf"
+    user_id: "32a3fef2-f97a-47f2-9026-a4f1b793456e"
+roles:
+  - id: "958efd14-fe13-444f-ae72-eb59282010b2"
+    name: "ROLE_ADMIN"
+    description: "Роль администратора"
+  - id: "831cc60d-460a-49c5-9ca1-d4c7e6bc310f"
+    name: "ROLE_MODERATOR"
+    description: "Роль модератора"
+  - id: "553b9edb-dfc8-473d-b9db-9ca37dc3fb26"
+    name: "ROLE_MANAGER"
+    description: "Роль менеджера"
+  - id: "763a09d3-3ceb-4efe-b637-d48518a5d0cf"
+    name: "ROLE_USER"
+    description: "Роль пользователя"

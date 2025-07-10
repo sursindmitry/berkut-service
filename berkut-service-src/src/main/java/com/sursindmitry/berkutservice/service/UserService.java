@@ -1,5 +1,6 @@
 package com.sursindmitry.berkutservice.service;
 
+import com.sursindmitry.berkutservice.entity.User;
 import com.sursindmitry.berkutservice.request.RegisterUserRequest;
 import com.sursindmitry.berkutservice.response.UserProfileResponse;
 import java.util.UUID;
@@ -41,4 +42,27 @@ public interface UserService {
      * @return идентификатор сохранённого пользователя
      */
     UUID saveUserAfterRegistration(RegisterUserRequest request, UUID userId);
+
+    /**
+     * Ищет пользователя по его идентификатору.
+     *
+     * @param userId идентификатор пользователя
+     * @return {@link User}
+     */
+    User findById(UUID userId);
+
+    /**
+     * Ищет пользователя по его идентификатору.
+     *
+     * @param userId идентификатор пользователя
+     * @return {@code true}, если пользователь существует
+     */
+    boolean existsById(UUID userId);
+
+    /**
+     * Сохраняет пользователя.
+     *
+     * @param user {@link User}
+     */
+    void save(User user);
 }

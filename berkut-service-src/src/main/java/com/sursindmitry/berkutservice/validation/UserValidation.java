@@ -8,6 +8,7 @@ import com.sursindmitry.commonmodels.exception.ValidationException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -19,7 +20,6 @@ import org.springframework.util.StringUtils;
  * и валидации основных данных пользователя.
  */
 @Component
-@RequiredArgsConstructor
 @Slf4j
 public class UserValidation {
 
@@ -185,5 +185,25 @@ public class UserValidation {
             errors.put(REQUEST, REQUEST_CANNOT_BE_EMPTY);
             throw new ValidationException(errors);
         }
+    }
+
+    /**
+     * Валидирует идентификатор пользователя.
+     *
+     * @param id идентификатор пользователя
+     * @return идентификатор в {@link UUID} формате
+     */
+    public UUID validateId(String id) {
+        Map<String, String> errors = new HashMap<>();
+
+        if (!StringUtils.hasText(id)) {
+            errors.put(REQUEST, "Идентификатор не может быть пустым");
+        }
+
+        if (!errors.isEmpty()) {
+            throw new ValidationException(errors);
+        }
+
+        return UUID.fromString(id);
     }
 }

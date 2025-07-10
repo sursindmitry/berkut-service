@@ -15,6 +15,7 @@ public class ApiConstant {
     public static final String MANAGER_API = "/api/v1/manager";
     public static final String USER_API = "/api/v1/user";
     public static final String PUBLIC_API = "/api/v1/public";
+    public static final String MESSAGE_API = "/api/v1/message";
 
     private ApiConstant() {
 

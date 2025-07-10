@@ -33,6 +33,9 @@ public class User extends AuditingBaseEntity {
     @Column(name = "email_verified", nullable = false)
     private Boolean emailVerified;
 
+    @Column(name = "chat_id")
+    private String chatId;
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) {
@@ -45,7 +48,8 @@ public class User extends AuditingBaseEntity {
         return Objects.equals(name, user.name)
             && Objects.equals(lastName, user.lastName)
             && Objects.equals(email, user.email)
-            && Objects.equals(emailVerified, user.emailVerified);
+            && Objects.equals(emailVerified, user.emailVerified)
+            && Objects.equals(chatId, user.chatId);
     }
 
     @Override

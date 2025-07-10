@@ -42,6 +42,9 @@ keycloak:
     client-id: ${keycloak.resource}
     client-secret: ${keycloak.credentials.secret}
 
+telegram:
+  token: ${TELEGRAM_TOKEN:token_bot}
+
 logging:
   level:
     root: info
