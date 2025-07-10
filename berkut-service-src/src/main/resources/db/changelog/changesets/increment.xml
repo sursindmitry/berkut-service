@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd">
+
+    <changeSet id="11072025-create-roles" author="sursin" logicalFilePath="increment.xml">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.tables
+                WHERE table_schema = 'berkut_service'
+                  AND table_name = 'roles'
+            </sqlCheck>
+        </preConditions>
+        <sql>
+            CREATE TABLE berkut_service.roles
+            (
+            id UUID PRIMARY KEY,
+            name VARCHAR(255) NOT NULL UNIQUE,
+            description VARCHAR(255)
+            );
+        </sql>
+    </changeSet>
+
+    <changeSet id="11072025-create-users" author="sursin" logicalFilePath="increment.xml">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.tables
+                WHERE table_schema = 'berkut_service'
+                  AND table_name = 'users'
+            </sqlCheck>
+        </preConditions>
+
+        <sql>
+            CREATE TABLE berkut_service.users
+            (
+            id UUID PRIMARY KEY,
+            first_name VARCHAR(255) NOT NULL,
+            last_name VARCHAR(255) NOT NULL,
+            email VARCHAR(255) NOT NULL UNIQUE,
+            email_verified BOOLEAN NOT NULL DEFAULT TRUE,
+            created TIMESTAMP,
+            updated TIMESTAMP,
+            created_by UUID,
+            updated_by UUID
+            );
+        </sql>
+    </changeSet>
+
+    <changeSet id="11072025-create-users-roles" author="sursin" logicalFilePath="increment.xml">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.tables
+                WHERE table_schema = 'berkut_service'
+                  AND table_name = 'users_roles'
+            </sqlCheck>
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.tables
+                WHERE table_schema = 'berkut_service'
+                  AND table_name = 'users'
+            </sqlCheck>
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.tables
+                WHERE table_schema = 'berkut_service'
+                  AND table_name = 'roles'
+            </sqlCheck>
+        </preConditions>
+
+        <sql>
+            CREATE TABLE berkut_service.users_roles
+            (
+                id      UUID PRIMARY KEY,
+                user_id UUID NOT NULL,
+                role_id UUID NOT NULL,
+                CONSTRAINT fk_users_roles_user FOREIGN KEY (user_id) REFERENCES berkut_service.users (id),
+                CONSTRAINT fk_users_roles_role FOREIGN KEY (role_id) REFERENCES berkut_service.roles (id),
+                CONSTRAINT uk_users_roles UNIQUE (user_id, role_id)
+            );
+        </sql>
+    </changeSet>
+
+
+</databaseChangeLog>

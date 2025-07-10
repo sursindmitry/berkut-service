@@ -1,0 +1,50 @@
+server:
+  port: 9191
+
+spring:
+  application:
+    name: berkut-service
+  data:
+    redis:
+      host: localhost
+      port: 6379
+  datasource:
+    url: jdbc:postgresql://${SERVER_POSTGRES_HOST:localhost}:${SERVER_POSTGRES_PORT:5432}/${SERVER_POSTGRES_DB:main_db}
+    username: ${SERVER_POSTGRES_USERNAME:postgres}
+    password: ${SERVER_POSTGRES_PASSWORD:postgres}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        format_sql: true
+    show-sql: true
+  liquibase:
+    enabled: true
+    change-log: db/changelog/db.changelog.yaml
+    default-schema: berkut_service
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${KEYCLOAK_AUTH_SERVER_URL:http://localhost:8080}/realms/${KEYCLOAK_REALM:platform}
+          jwk-set-uri: ${KEYCLOAK_AUTH_SERVER_URL:http://localhost:8080}/realms/${KEYCLOAK_REALM:platform}/protocol/openid-connect/certs
+
+keycloak:
+  realm: ${KEYCLOAK_REALM:platform}
+  auth-server-url: ${KEYCLOAK_AUTH_SERVER_URL:http://localhost:8080}
+  resource: ${KEYCLOAK_RESOURCE:platform-service}
+  credentials:
+    secret: ${KEYCLOAK_CLIENT_SECRET:**********}
+  roles-client:
+    client-id: ${keycloak.resource}
+    client-secret: ${keycloak.credentials.secret}
+
+logging:
+  level:
+    org.springframework.security: debug
+    org.keycloak: debug
+    com.sursindmitry: debug
+    root: info

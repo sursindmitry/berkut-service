@@ -1,0 +1,33 @@
+name: Push branch workflow PR
+
+on:
+  push:
+    branches:
+      - feature/*
+      - bugfix/*
+
+jobs:
+  build-branch:
+    name: Build branch and run unit tests
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4.1.7
+
+      - name: Set up Java
+        uses: actions/setup-java@v4.2.2
+        with:
+          java-version: '17'
+          distribution: 'corretto'
+
+      - name: Setup Maven for GitHub Packages
+        uses: ./.github/actions/setup-maven
+        with:
+          username: ${{ secrets.USERNAME_GITHUB }}
+          token: ${{ secrets.TOKEN_GITHUB }}
+
+      - name: Build and Test
+        working-directory: .
+        run: mvn clean install -Dspring.profiles.active=test
+
