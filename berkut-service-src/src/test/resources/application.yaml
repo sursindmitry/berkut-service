@@ -10,3 +10,6 @@ spring:
     change-log: db/changelog/db.changelog.yaml
     default-schema: berkut_service
     liquibase-schema: berkut_service
+
+telegram:
+  token: ${TELEGRAM_TOKEN:token_bot}

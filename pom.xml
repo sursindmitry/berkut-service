@@ -38,6 +38,7 @@
         <database-rider.version>1.44.0</database-rider.version>
         <keycloak.version>23.0.6</keycloak.version>
         <common-models.version>0.0.3-SNAPSHOT</common-models.version>
+        <telegram.version>6.9.7.1</telegram.version>
     </properties>
 
     <dependencyManagement>
