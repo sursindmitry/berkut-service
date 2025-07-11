@@ -11,13 +11,13 @@ volumes:
 
 services:
   app:
-    image: app:ghcr.io/sursindmitry/berkut-service:latest
+    image: ghcr.io/sursindmitry/berkut-service:latest
     container_name: berkut-service
     environment:
       - SPRING_PROFILES_ACTIVE=local
 
       # Telegram
-      - TELEGRAM_TOKEN=${TELEGRAM_TOKEN:12345678}
+      - TELEGRAM_TOKEN=${TELEGRAM_TOKEN:-12345678}
 
       # PostgreSQL
       - SERVER_POSTGRES_HOST=${SERVER_POSTGRES_HOST:-main-db}
