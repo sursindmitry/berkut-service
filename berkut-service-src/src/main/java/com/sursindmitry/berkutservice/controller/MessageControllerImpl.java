@@ -2,9 +2,11 @@ package com.sursindmitry.berkutservice.controller;
 
 import com.sursindmitry.berkutservice.api.MessageController;
 import com.sursindmitry.berkutservice.request.MessageRequest;
+import com.sursindmitry.berkutservice.response.MessageResponse;
 import com.sursindmitry.berkutservice.service.MessageService;
 import java.security.Principal;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,5 +28,13 @@ public class MessageControllerImpl implements MessageController {
         messageService.sendMessage(messageRequest, principal.getName());
 
         return ResponseEntity.ok().build();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Page<MessageResponse> getMessages(int page, int size, Principal principal) {
+        return messageService.findMessages(page, size, principal.getName());
     }
 }
